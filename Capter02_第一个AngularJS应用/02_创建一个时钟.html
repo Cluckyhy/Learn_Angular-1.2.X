@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用Angular创建一个时钟</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+  </head>
+  <body>
+    <div ng-controller="myApp">
+      <input ng-model="person.name" type="text" placeholder="请输入你的名字" />
+      <h1>Hello {{person.name}}</h1>
+      <!-- <h3>{{clock}}</h3> -->
+      <h2>{{clock.now}}</h2>
+    </div>
+
+    <script type="text/javascript">
+      //第一种方式
+      // function myApp($scope, $timeout) {
+      //   $scope.person = {
+      //     name: "chy",
+      //   };
+      //   var updateClock = function () {
+      //     $scope.clock = new Date();
+      //     $timeout(function () {
+      //       updateClock();
+      //     }, 1000);
+      //   };
+      //   updateClock();
+      // }
+
+      //第二种方式
+      function myApp($scope) {
+        $scope.clock = {
+          now: new Date(),
+        };
+        var updateClock = function () {
+          $scope.clock.now = new Date();
+        };
+        setInterval(function () {
+          // Scope提供$apply方法来传播Model的变化，在scope.apply()方法里面，它会去调用scope.digest()方法。
+          // digest()方法会 更新bindings
+          $scope.$apply(updateClock);
+        }, 1000);
+
+        updateClock();
+      }
+    </script>
+  </body>
+</html>
