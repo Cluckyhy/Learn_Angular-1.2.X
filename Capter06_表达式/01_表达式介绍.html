@@ -25,6 +25,7 @@
   <body>
     <div ng-app="myApp">
       <div ng-controller="myCtrl">
+        <!-- 在输入框中输入表达式  parsedValue就是输入框中表达式的结果 -->
         <input ng-model="expr" type="text" placeholder="Enter an Expression" />
         <h2>{{parsedValue}}</h2>
       </div>
@@ -36,8 +37,11 @@
         .controller("myCtrl", function ($scope, $parse) {
           // $scope.parsedValue = "jjj";
           $scope.$watch("expr", function (newVal, oldVal, scope) {
+            // console.log(newVal);
+            // console.log(oldVal);
             if (newVal !== oldVal) {
               //用该表达式设置parseFun
+              // console.log($parse(newVal));
               var parseFun = $parse(newVal);
               //获取经过解析后表达式的值
               $scope.parsedValue = parseFun(scope);

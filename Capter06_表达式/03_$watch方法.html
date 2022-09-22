@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$watch方法的使用</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div ng-controller="myCtrl">
+        <input type="text" ng-model="name" />
+        改变次数：{{count}}--{{name}}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+      app.controller("myCtrl", function ($scope) {
+        $scope.name = "lulu";
+        $scope.count = 0;
+
+        // 监听一个model 当一个model每次改变时，都会触发第2个函数
+        $scope.$watch("name", function (newVal, oldVal) {
+          ++$scope.count;
+          console.log(newVal);
+          console.log(oldVal);
+          if ($scope.count > 30) {
+            $scope.name = "已经大于30次了";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
