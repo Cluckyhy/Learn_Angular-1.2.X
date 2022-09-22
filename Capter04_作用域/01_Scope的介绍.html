@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scope的介绍</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+  </head>
+  <body>
+    <!-- 
+    1、作用域（scope）是构成AngularJS应用的核心基础，在整个框架中都被广泛使用，因此了解它如何工作是非常重要的。
+    2、应用的作用域是和应用的数据模型相关联的，同时作用域也是表达式执行的上下文。$scope
+       对象是定义应用业务逻辑、控制器方法和视图属性的地方。
+    3、作用域是视图和控制器之间的胶水。在应用将视图渲染并呈献给用户之前，视图中的模板会
+       和作用域进行连接，然后应用会对DOM进行设置以便将属性变化通知给AngularJS。这个功能让XHR请求等promise对象的实现变得非常容易。
+    4、AngularJS启动并生成视图时，会将根ng-app元素同$rootScope进行绑定。$rootScope是所有$scope对象的最上层。
+    5、$rootScope是AngularJS中最接近全局作用域的对象。在$rootScope上附加太多业务逻并不是好主意，这与污染JavaScript的全局作用域是一样的。
+    6、$scope对象就是一个普通的JavaScript对象，我们可以在其上随意修改或添加属性。
+    7、$scope对象在AngularJS中充当数据模型，但与传统的数据模型不一样，$scope并不负责处理和操作数据，它只是视图和HTML之间的桥梁，它是视图和控制器之间的胶水。
+    8、$scope的所有属性，都可以自动被视图访问到。
+   -->
+
+    <!-- 直接将name值绑定在全局作用域 $rootScope 对象身上 -->
+    <!-- <div ng-app="myApp">
+      <h1>Hello {{name}}</h1>
+    </div>
+
+    <script type="text/javascript">
+      angular.module("myApp", []).run(function ($rootScope) {
+        $rootScope.name = "陈慧亿";
+      });
+    </script> -->
+
+    <!-- 
+      我们可以不将变量设置在$rootScope上，而是用控制器显式创建一个隔离的子$scope对象，
+      把它设置到这个子对象上。使用ng-controller指令可以将一个控制器对象附加到DOM元素上
+     -->
+
+    <div ng-app="myApp">
+      <div ng-controller="myCtl">
+        <h1>Hello {{name}}</h1>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      angular.module("myApp", []).controller("myCtl", function ($scope) {
+        $scope.name = "露露";
+      });
+    </script>
+  </body>
+</html>

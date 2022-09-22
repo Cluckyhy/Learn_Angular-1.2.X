@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>控制器的介绍</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+    <!-- 
+    控制器在AngularJS中的作用是增强视图。在Hello World的例子中，我们并没有使用普通的控制器，而是使用了一个隐式控制器。
+    AngularJS中的控制器是一个函数，用来向视图的作用域中添加额外的功能。我们用它来给作用域对象设置初始状态，并添加自定义行为。
+    当我们在页面上创建一个新的控制器时，AngularJS会生成并传递一个新的$scope给这个控制器。可以在这个控制器里初始化$scope。
+    由于AngularJS会负责处理控制器的实例化过程，我们只需编写构造函数即可。
+    function FirstController($scope) { 
+      $scope.message = "hello"; 
+    }
+
+    细心的读者会发现，我们是在全局作用域中创建的这个函数。这样做并不合适，因为会污染
+    全局命名空间。更合理的方式是创建一个模块，然后在模块中创建控制器
+
+    var app = angular.module('app', []); 
+    app.controller('FirstController', function($scope) { 
+    $scope.message = "hello"; 
+    });
+   -->
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div ng-controller="myCtrl">
+        <h3>The simplest adding machine ever</h3>
+        <button ng-click="add(1)">Add</button>
+        <a href="#" ng-click="subtract(1)">Subtract</a>
+        <h1>Current count: {{counter}}</h1>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+      app.controller("myCtrl", function ($scope) {
+        $scope.counter = 0;
+        $scope.add = function (num) {
+          $scope.counter += num;
+        };
+        $scope.subtract = function (num) {
+          $scope.counter -= num;
+        };
+      });
+    </script>
+  </body>
+</html>

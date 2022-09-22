@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>控制器嵌套</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+    <!-- 
+    AngularJS应用的任何一个部分，无论它渲染在哪个上下文中，都有父级作用域存在。对于ng-app所处的层级来讲，它的父级作用域就是$rootScope。
+        有一个例外：在指令内部创建的作用域被称作孤立作用域。
+    
+    除了孤立作用域外，所有的作用域都通过原型继承而来，也就是说它们都可以访问父级作用域。如果熟悉面向对象编程，对这个机制应该不会陌生。
+    默认情况下，AngularJS在当前作用域中无法找到某个属性时，便会在父级作用域中进行查找。如果AngularJS找不到对应的属性，会顺着父级作用域一直向上寻找，
+    直到抵达$rootScope为止。如果在$rootScope中也找不到，程序会继续运行，但视图无法更新。
+   -->
+  </head>
+  <body>
+    <div ng-app="myApp">
+
+      <!-- 
+        设计良好的应用会将复杂的逻辑放到指令和服务中。通过使用指令和服务，我们可以将控制器重构成一个轻量且更易维护的形式
+       -->
+      <div ng-controller="ParentController">
+        <div ng-controller="ChildController">
+          <a href="#" ng-click="sayHello()">Say Hello</a>
+        </div>
+        {{person}}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+      app.controller("ParentController", function ($scope) {
+        $scope.person = {
+          greeted: false,
+        };
+      });
+
+      app.controller("ChildController", function ($scope) {
+        $scope.person.name = "Lulu";
+      });
+    </script>
+  </body>
+</html>
