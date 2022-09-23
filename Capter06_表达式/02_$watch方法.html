@@ -22,7 +22,20 @@
         $scope.count = 0;
 
         // 监听一个model 当一个model每次改变时，都会触发第2个函数
-        $scope.$watch("name", function (newVal, oldVal) {
+        // $scope.$watch("name", function (newVal, oldVal) {
+        //   ++$scope.count;
+        //   console.log(newVal);
+        //   console.log(oldVal);
+        //   if ($scope.count > 30) {
+        //     $scope.name = "已经大于30次了";
+        //   }
+        // });
+
+        // $watch的第二个参数方法中的第三个参数 scope 是作用域引用
+        $scope.$watch("name", function (newVal, oldVal, scope) {
+          console.log(scope);
+          console.log(scope.name); // lulu
+
           ++$scope.count;
           console.log(newVal);
           console.log(oldVal);
