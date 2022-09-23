@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$interpolateProvider的使用</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div ng-controller="myCtrl">
+        <p>@@name@@</p>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+      app.config([
+        "$interpolateProvider",
+        function ($interpolateProvider) {
+          $interpolateProvider.startSymbol("@@");
+          $interpolateProvider.endSymbol("@@");
+        },
+      ]);
+
+      app.controller("myCtrl", [
+        "$scope",
+        function ($scope) {
+          $scope.name = "lulu";
+        },
+      ]);
+    </script>
+  </body>
+</html>

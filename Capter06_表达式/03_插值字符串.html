@@ -38,24 +38,32 @@
     </div>
 
     <script type="text/javascript">
-      // var app2 = angular.module("emailParser", []);
+      var app2 = angular.module("emailParser", []);
       // app2.config(["$interpolateProvider"], function ($interpolateProvider) {
-      //   $interpolateProvider.startSymbol("__");
-      //   $interpolateProvider.endSymbol("__");
+      //   // $interpolateProvider.startSymbol("__");
+      //   // $interpolateProvider.endSymbol("__");
       // });
 
-      // app2.factory("EmailParser", [
-      //   "$interpolate",
-      //   function ($interpolate) {
-      //     // 处理解析的服务
-      //     return {
-      //       parse: function (text, context) {
-      //         var template = $interpolate(text);
-      //         return template(context);
-      //       },
-      //     };
-      //   },
-      // ]);
+      app2.config([
+        "$interpolateProvider",
+        function ($interpolateProvider) {
+          $interpolateProvider.startSymbol("__");
+          $interpolateProvider.endSymbol("__");
+        },
+      ]);
+
+      app2.factory("EmailParser", [
+        "$interpolate",
+        function ($interpolate) {
+          // 处理解析的服务
+          return {
+            parse: function (text, context) {
+              var template = $interpolate(text);
+              return template(context);
+            },
+          };
+        },
+      ]);
 
       // var app = angular.module("myApp", []);
 
