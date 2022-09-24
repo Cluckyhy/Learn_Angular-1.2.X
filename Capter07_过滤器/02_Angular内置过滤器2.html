@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Angular内置过滤器2</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div ng-controller="myCtrl">
+        <!-- 第一个 lowercase 将字符串转化为小写-->
+        {{ "San Francisco is very cloudy" | lowercase}}<br />
+
+        <!-- 第一个 uppercase 将字符串转化为小写-->
+        {{ "hello wo shi chy" | uppercase}}<br />
+
+        <!-- 第二个 number number过滤器将数字格式化成文本。它的第二个参数是可选的，用来控制小数点后截取的位数。-->
+        {{ 123456789 | number}}<br />
+        {{ 123456789 | number:2}}<br />
+        <!-- 如果传入了一个非数字字符，会返会空字符串。会返会空字符串 -->
+        {{'hhh'| number}}<br />
+
+        <!-- 第三个 orderBy 可以用表达式对指定的数组进行排序。 可以接受两个参数，第一个是必需的，第二个是可选的。-->
+
+        <!-- 第一个参数是用来确定数组排序方向的谓词 -->
+        <!-- 1、函数    当第一个参数是函数时，该函数会被当作待排序对象的getter方法。 -->
+        <!-- 2、字符串  对这个字符串进行解析的结果将决定数组元素的排序方向。我们可以传入+或-来强制进行升序或降序排列。 -->
+        <!-- 3、数组    在排序表达式中使用数组元素作为谓词。对于与表达式结果并不严格相等的每个元素，则使用第一个谓词。 -->
+
+        {{ [{ 'name': 'Ari', 'status': 'awake' },{ 'name': 'Q', 'status':
+        'sleeping' },{ 'name': 'Nate', 'status': 'awake' }] | orderBy:'name'
+        }}<br />
+
+        <!-- 第二个参数用来控制排序的方向（是否逆向）。 -->
+        {{ [{ 'name': 'Ari', 'status': 'awake' },{ 'name': 'Q', 'status':
+        'sleeping' },{ 'name': 'Nate', 'status': 'awake' }] |
+        orderBy:'name':true }}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+
+      app.controller("myCtrl", ["$scope", function ($scope) {}]);
+    </script>
+  </body>
+</html>

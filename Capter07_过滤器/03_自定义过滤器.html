@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义过滤器</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+    <!-- 过滤器本质上就是一个函数，是一个会把我们输入的内容当做参数传入进去的函数 -->
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div ng-controller="myCtrl">
+        {{ 'ginger loves dog treats' | lowercase | capitalize }}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+      // 自定义过滤器
+      app.filter("capitalize", function () {
+        return function (input) {
+          if (input) {
+            return input[0].toUpperCase() + input.slice(1);
+          }
+        };
+      });
+      app.controller("myCtrl", function ($scope) {});
+    </script>
+  </body>
+</html>

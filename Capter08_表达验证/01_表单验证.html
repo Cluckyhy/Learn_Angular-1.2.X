@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表单验证</title>
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div>
+        <!-- 如果想要屏蔽浏览器对表单的默认验证行为，可以在表单元素上添加novalidate标记。 -->
+        <form name="form" novalidate>
+          <label name="email">Your email</label>
+          <input
+            type="email"
+            name="email"
+            ng-model="email"
+            placeholder="Email Address"
+          />
+
+          <!-- 必填项 -->
+          <input type="text" required />
+
+          <!-- 最小长度 -->
+          <input type="text" ng-minlength="5" />
+
+          <!-- 最大长度 -->
+          <input type="text" ng-maxlength="20" />
+
+          <!-- 模式匹配 -->
+          <!-- 使用ng-pattern='/PATTERN'来确保输入能够匹配指定的正则表达式 -->
+          <input type="text" ng-pattern="[a-zA-Z]" />
+
+          <!-- 电子邮箱 -->
+          <input type="email" name="email" ng-model="user.email" />
+
+          <!-- 数字 -->
+          <input type="number" name="age" ng-model="user.age" />
+
+          <!-- 验证URL -->
+          <input type="url" name="homepage" ng-model="user.facebook_url" />
+
+          <!-- 自定义验证暂定 -->
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

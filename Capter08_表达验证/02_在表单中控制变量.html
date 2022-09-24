@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在表单中控制变量</title>
+</head>
+<body>
+  <!-- 未修改的表单 -->
+  <!-- 这是一个布尔属性，用来判断用户是否修改了表单。如果未修改，值为true，如果修改过值为false： -->
+  <!-- form.inputFileName.$pristine -->
+
+  <!-- 修改过的表单 -->
+  <!-- 只要用户修改过表单，无论输入是否通过验证，该值都返回true： -->
+  <!-- formName.inputFieldName.$dirty -->
+
+  <!-- 合法的表单 -->
+  <!-- 这个布尔型的属性用来判断表单的内容是否合法。如果当前表单内容是合法的，下面属性的值就是true： -->
+  <!-- formName.inputFieldName.$valid -->
+
+  <!-- 不合法的表单 -->
+  <!-- 这个布尔属性用来判断表单的内容是否不合法。如果当前表单内容是不合法的，下面属性的值为true： -->
+  <!-- formName.inputFieldName.$invalid -->
+
+  <!-- 错误 -->
+  <!-- 这是AngularJS提供的另外一个非常有用的属性：$error对象。它包含当前表单的所有验证内容，以及它们是否合法的信息。用下面的语法访问这个属性： -->
+  <!-- formName.inputfieldName.$error -->
+  <!-- 如果验证失败，这个属性的值为true；如果值为false，说明输入字段的值通过了验证。 -->
+</body>
+</html>

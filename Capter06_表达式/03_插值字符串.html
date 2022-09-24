@@ -38,6 +38,8 @@
     </div>
 
     <script type="text/javascript">
+
+      
       var app2 = angular.module("emailParser", []);
       // app2.config(["$interpolateProvider"], function ($interpolateProvider) {
       //   // $interpolateProvider.startSymbol("__");
@@ -101,7 +103,7 @@
           // 设置监听
           $scope.$watch("emailBody", function (newVal) {
             if (newVal) {
-              $scope.previewText = EmailParse.parse(newVal, {
+              $scope.previewText = EmailParser.parse(newVal, {
                 to: $scope.to,
               });
             }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Angular内置过滤器1</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.2.13/angular.js"></script>
+  </head>
+  <body>
+    <div ng-app="myApp">
+      <div ng-controller="myCtrl">
+        <!-- 第一个 货币 currency -->
+        <h2>货币为：{{ 123 | currency}}</h2>
+
+        <!-- 第二个 时间 -->
+        <h2>{{today}}</h2>
+        <h3>日期为：{{today | date:'medium'}}</h3>
+        <h3>日期为：{{today | date:'short'}}</h3>
+        <h3>日期为：{{today | date:'fullDate'}}</h3>
+        <h3>日期为：{{today | date:'longDate'}}</h3>
+        <h3>日期为：{{today | date:'mediumDate'}}</h3>
+        <h3>日期为：{{today | date:'shortDate'}}</h3>
+        <h3>日期为：{{today | date:'mediumTime'}}</h3>
+        <h3>日期为：{{today | date:'shortTime'}}</h3>
+
+        <!-- 第三个  filter-->
+        <!--  
+              filter过滤器可以从给定数组中选择一个子集，并将其生成一个新数组返回。这个过滤器通常用来过滤需要进行展示的元素。
+              这个过滤器的第一个参数可以是字符串、对象或是一个用来从数组中选择元素的函数。
+         -->
+
+        <!-- 3.1、传入字符串 返回所有包含这个字符串的元素。如果我们想返回不包含该字符串的元素，在参数前加!符号。-->
+        {{['Ari','Lerner','likes','To','Eat'] | filter:'e'}}
+
+        <!-- 3.2、传入对象 AngularJS会将待过滤对象的属性同这个对象中的同名属性进行比较，如果属性值是字符串
+        就会判断是否包含该字符串。如果我们希望对全部属性都进行对比，可以将$当作键名。-->
+        {{ [{'name':'lulu','City':'GZ','gender':'女'} ,
+        {'name':'chy','City':'SZ','gender':'男'}] | filter:{'gender':'男'} }}
+
+        <!-- 3.3、传入一个函数 对每个元素都执行这个函数，返回非假值的元素会出现在新的数组中并返回。 -->
+        {{['Ario','like','to','Triver'] | filter:isCapitalized}}
+        <br />
+
+        <!-- 第四个 json -->
+        {{ {'name':'Chy','gender':'男','hobby':'打篮球'} | json}}
+        <br />
+
+        <!-- 第五个 limitTo -->
+        <!--  limitTo过滤器会根据传入的参数生成一个新的数组或字符串，新的数组或字符串的长度取决于传入的参数，
+              通过传入参数的正负值来控制从前面还是从后面开始截取。 
+              如果传入的长度值大于被操作数组或字符串的长度，那么整个数组或字符串都会被返回。
+        -->
+        <!-- 前三个字符 -->
+        {{ 'San Francisco is very cloudy' | limitTo:3 }}
+        <br />
+        <!-- 最后6个字符 -->
+        {{ 'San Francisco is very cloudy' | limitTo:-6 }}
+        <br />
+        <!-- 对数组也可以进行同样的操作。返回数组的第一个元素 -->
+        {{ ['a','b','c','d','e','f'] | limitTo:1 }}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+
+      app.controller("myCtrl", [
+        "$scope",
+        function ($scope) {
+          $scope.today = new Date();
+          // 过滤器函数
+          $scope.isCapitalized = function (str) {
+            return str[0] === str[0].toUpperCase();
+          };
+        },
+      ]);
+    </script>
+  </body>
+</html>
